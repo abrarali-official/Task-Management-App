@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
 import 'package:flutter_golang_yt/widgets/button_widget.dart';
 import 'package:flutter_golang_yt/widgets/text_field_widget.dart';
+import 'package:get/get.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -27,10 +28,12 @@ class AddTask extends StatelessWidget {
           children: [
             Column(children: [
               const SizedBox(
-                height: 15,
+                height: 40,
               ),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.back();
+                  },
                   icon: const Icon(
                     Icons.arrow_back,
                     color: AppColors.secondaryColor,
