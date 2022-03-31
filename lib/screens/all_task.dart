@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
+import 'package:flutter_golang_yt/screens/home_screen.dart';
 import 'package:flutter_golang_yt/widgets/task_widget.dart';
+import 'package:get/get.dart';
 
 import '../widgets/button_widget.dart';
 
@@ -35,9 +37,14 @@ class AllTask extends StatelessWidget {
           Container(
             alignment: Alignment.topLeft,
             padding: const EdgeInsets.only(left: 20, top: 40),
-            child: const Icon(
-              Icons.arrow_back,
-              color: AppColors.secondaryColor,
+            child: InkWell(
+              onTap: () {
+                Get.back();
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: AppColors.secondaryColor,
+              ),
             ),
             width: double.maxFinite,
             height: MediaQuery.of(context).size.height / 3.2,
@@ -53,9 +60,14 @@ class AllTask extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               children: [
-                const Icon(
-                  Icons.home,
-                  color: AppColors.secondaryColor,
+                InkWell(
+                  onTap: () {
+                    Get.to(const HomeScreen());
+                  },
+                  child: const Icon(
+                    Icons.home,
+                    color: AppColors.secondaryColor,
+                  ),
                 ),
                 const SizedBox(
                   width: 20,
@@ -106,12 +118,18 @@ class AllTask extends StatelessWidget {
                   confirmDismiss: (DismissDirection direction) async {
                     if (direction == DismissDirection.startToEnd) {
                       showModalBottomSheet(
-                          backgroundColor: Colors.yellow,
+                          backgroundColor: Colors.transparent,
                           barrierColor: Colors.transparent,
                           context: context,
                           builder: (_) {
                             return Container(
-
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color(0xFF2e3253).withOpacity(0.5),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  )),
                               height: 550,
                               child: Padding(
                                 padding:
@@ -137,7 +155,7 @@ class AllTask extends StatelessWidget {
                           });
                       return false;
                     } else {
-                      return Future.delayed(const Duration(seconds: 2),
+                      return Future.delayed(const Duration(seconds: 1),
                           () => direction == DismissDirection.endToStart);
                     }
                   },

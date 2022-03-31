@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
+import 'package:flutter_golang_yt/screens/all_task.dart';
 import 'package:flutter_golang_yt/widgets/button_widget.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -53,10 +55,17 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const ButtonWidget(
-                backgroundcolor: Colors.white,
-                text: 'View All',
-                textColor: AppColors.smallTextColor,
+              InkWell(
+                onTap: () {
+                  Get.to(() => const AllTask(),
+                      transition: Transition.fade,
+                      duration: const Duration(seconds: 1));
+                },
+                child: const ButtonWidget(
+                  backgroundcolor: Colors.white,
+                  text: 'View All',
+                  textColor: AppColors.smallTextColor,
+                ),
               ),
             ],
           ),
