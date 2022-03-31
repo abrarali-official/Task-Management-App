@@ -8,6 +8,15 @@ class AllTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List myData = ["Try harder", "Try Smarter"];
+    final leftEditIcon = Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      color: const Color(0xFF2e3253),
+      child: const Icon(
+        Icons.edit,
+        color: Colors.white,
+      ),
+      alignment: Alignment.centerLeft,
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -67,9 +76,26 @@ class AllTask extends StatelessWidget {
             child: ListView.builder(
               itemCount: myData.length,
               itemBuilder: (context, index) {
-                return TaskWidget(
-                  text: myData[index],
-                  color: Colors.blueGrey,
+                return Dismissible(
+                  background: leftEditIcon,
+                  onDismissed: (DismissDirection direction) {
+                    // ignore: avoid_print
+                    print('dismiss after');
+                  },
+                  confirmDismiss: (DismissDirection direction) async {
+                    // ignore: avoid_print
+                    print("confirming ");
+                    return true;
+                  },
+                  key: ObjectKey(index),
+                  child: Container(
+                    margin:
+                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                    child: TaskWidget(
+                      text: myData[index],
+                      color: Colors.blueGrey,
+                    ),
+                  ),
                 );
               },
             ),
