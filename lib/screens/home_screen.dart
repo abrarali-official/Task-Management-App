@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
-import 'package:flutter_golang_yt/widgets/Button_widget2.dart';
 import 'package:flutter_golang_yt/widgets/button_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,15 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: MediaQuery.of(context).size.height / 2.5,
               ),
               const ButtonWidget(
-                color: AppColors.mainColor,
+                backgroundcolor: AppColors.mainColor,
                 text: 'Add Task',
                 textColor: Colors.white,
               ),
               const SizedBox(
                 height: 20,
               ),
-              const ButtonWidget2(
-                color: Colors.white,
+              const ButtonWidget(
+                backgroundcolor: Colors.white,
                 text: 'View All',
                 textColor: AppColors.smallTextColor,
               ),

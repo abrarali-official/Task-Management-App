@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
 import 'package:flutter_golang_yt/widgets/task_widget.dart';
 
+import '../widgets/button_widget.dart';
+
 class AllTask extends StatelessWidget {
   const AllTask({Key? key}) : super(key: key);
 
@@ -10,12 +12,21 @@ class AllTask extends StatelessWidget {
     List myData = ["Try harder", "Try Smarter"];
     final leftEditIcon = Container(
       margin: const EdgeInsets.only(bottom: 10),
-      color: const Color(0xFF2e3253),
+      color: const Color(0xFF2e3253).withOpacity(0.5),
       child: const Icon(
         Icons.edit,
         color: Colors.white,
       ),
       alignment: Alignment.centerLeft,
+    );
+    final rightDeleteIcon = Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      color: Colors.redAccent,
+      child: const Icon(
+        Icons.delete,
+        color: Colors.white,
+      ),
+      alignment: Alignment.centerRight,
     );
     return Scaffold(
       backgroundColor: Colors.white,
@@ -61,13 +72,22 @@ class AllTask extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                const Icon(
-                  Icons.home,
-                  color: AppColors.secondaryColor,
+                Container(
+                  padding: const EdgeInsets.only(left: 230),
+                  child: const Icon(
+                    Icons.calendar_month,
+                    color: AppColors.secondaryColor,
+                  ),
                 ),
-                const Text(
-                  '2',
-                  style: TextStyle(fontSize: 20),
+                const Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Text(
+                    '2',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: AppColors.secondaryColor,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -78,14 +98,48 @@ class AllTask extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Dismissible(
                   background: leftEditIcon,
+                  secondaryBackground: rightDeleteIcon,
                   onDismissed: (DismissDirection direction) {
                     // ignore: avoid_print
                     print('dismiss after');
                   },
                   confirmDismiss: (DismissDirection direction) async {
-                    // ignore: avoid_print
-                    print("confirming ");
-                    return true;
+                    if (direction == DismissDirection.startToEnd) {
+                      showModalBottomSheet(
+                          backgroundColor: Colors.yellow,
+                          barrierColor: Colors.transparent,
+                          context: context,
+                          builder: (_) {
+                            return Container(
+
+                              height: 550,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    ButtonWidget(
+                                        backgroundcolor: AppColors.mainColor,
+                                        text: "View",
+                                        textColor: Colors.white),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    ButtonWidget(
+                                        backgroundcolor: AppColors.mainColor,
+                                        text: "Edit",
+                                        textColor: Colors.blue),
+                                  ],
+                                ),
+                              ),
+                            );
+                          });
+                      return false;
+                    } else {
+                      return Future.delayed(const Duration(seconds: 2),
+                          () => direction == DismissDirection.endToStart);
+                    }
                   },
                   key: ObjectKey(index),
                   child: Container(
