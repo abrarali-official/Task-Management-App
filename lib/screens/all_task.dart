@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_golang_yt/colors/app_colors.dart';
+import 'package:flutter_golang_yt/screens/add_task.dart';
 import 'package:flutter_golang_yt/screens/home_screen.dart';
 import 'package:flutter_golang_yt/widgets/task_widget.dart';
 import 'package:get/get.dart';
@@ -60,9 +61,10 @@ class AllTask extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               children: [
+//  -------------------Home Icon----------------------------------
                 InkWell(
                   onTap: () {
-                    Get.to(const HomeScreen());
+                    Get.to(() => const HomeScreen());
                   },
                   child: const Icon(
                     Icons.home,
@@ -72,10 +74,16 @@ class AllTask extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
+//  -------------------ADD TASK Icon----------------------------------
                 Container(
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(() => const AddTask());
+                    },
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
                   ),
                   width: 25,
                   height: 25,
@@ -84,6 +92,7 @@ class AllTask extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+//  -------------------Cal Icon----------------------------------
                 Container(
                   padding: const EdgeInsets.only(left: 230),
                   child: const Icon(
@@ -104,6 +113,7 @@ class AllTask extends StatelessWidget {
               ],
             ),
           ),
+//  -------------------All Task Area----------------------------------
           Flexible(
             child: ListView.builder(
               itemCount: myData.length,
@@ -116,6 +126,7 @@ class AllTask extends StatelessWidget {
                     print('dismiss after');
                   },
                   confirmDismiss: (DismissDirection direction) async {
+//  -----------------------------------------------This condition is use for Edit the TASK----------------------------------
                     if (direction == DismissDirection.startToEnd) {
                       showModalBottomSheet(
                           backgroundColor: Colors.transparent,
@@ -137,6 +148,7 @@ class AllTask extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: const [
+//  -----------------------------------------------------View TASK Button----------------------------------
                                     ButtonWidget(
                                         backgroundcolor: AppColors.mainColor,
                                         text: "View",
@@ -144,6 +156,8 @@ class AllTask extends StatelessWidget {
                                     SizedBox(
                                       height: 20,
                                     ),
+
+//  ----------------------------------------Edit Task button----------------------------------
                                     ButtonWidget(
                                         backgroundcolor: AppColors.mainColor,
                                         text: "Edit",
@@ -153,16 +167,21 @@ class AllTask extends StatelessWidget {
                               ),
                             );
                           });
+
+//  --------------------------------------This condition is use for Delete the TASK----------------------------------
                       return false;
                     } else {
-                      return Future.delayed(const Duration(seconds: 1),
+                      return Future.delayed(const Duration(microseconds: 1),
                           () => direction == DismissDirection.endToStart);
                     }
                   },
                   key: ObjectKey(index),
                   child: Container(
-                    margin:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 10,
+                    ),
                     child: TaskWidget(
                       text: myData[index],
                       color: Colors.blueGrey,

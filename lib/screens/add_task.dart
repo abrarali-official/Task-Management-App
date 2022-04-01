@@ -55,8 +55,10 @@ class AddTask extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
+
+//----------------------------------ADD TASK BUTTON-------------------------------------------------------------
                 const ButtonWidget(
-                    text: 'Add Task',
+                    text: 'Add ',
                     textColor: Colors.white,
                     backgroundcolor: AppColors.mainColor)
               ],
